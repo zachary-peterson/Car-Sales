@@ -23,7 +23,7 @@ export const carState = {
           console.log('addOnClick Function running succesfully...');
           if(state.car.features.find(feat => feat.id === action.payload.id)){
             return state;
-        }else{
+        } else {
             return {
                 ...state,
                 car: {
