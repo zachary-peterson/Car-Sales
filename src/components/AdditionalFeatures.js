@@ -1,10 +1,9 @@
 import React from 'react';
 import AdditionalFeature from './AdditionalFeature';
 import { connect } from 'react-redux';
-import { state } from '../reducers/addFeaturesReducer';
 import { addOnClick } from '../actions/onClickActions';
 
-console.log(state);
+
 
 const AdditionalFeatures = props => {
   console.log(props);
@@ -15,7 +14,7 @@ const AdditionalFeatures = props => {
       {props.additionalFeatures.length ? (
         <ol type="1">
           {props.additionalFeatures.map(item => (
-            <AdditionalFeature addOnClick={addOnClick} key={item.id} feature={item} />
+            <AdditionalFeature addOnClick={props.addOnClick} key={item.id} feature={item} />
           ))}
         </ol>
       ) : (
@@ -25,4 +24,10 @@ const AdditionalFeatures = props => {
   );
 };
 
-export default AdditionalFeatures;
+const mapStateToProps = state => {
+  return {
+    additionalFeatures: state.additionalFeatures
+  }
+}
+
+export default connect(mapStateToProps, {addOnClick})(AdditionalFeatures)

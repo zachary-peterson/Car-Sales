@@ -1,6 +1,6 @@
 import { ADD_ONCLICK, REMOVE_ONCLICK } from '../actions/onClickActions'
 
-export const state = {
+export const carState = {
     additionalPrice: 0,
     car: {
       price: 26395,
@@ -17,23 +17,37 @@ export const state = {
     ]
   };
 
-  export const addFeaturesReducer = (state, action) => {
+  export const reducer = (state =  carState, action) => {
     switch(action.type) {
         case ADD_ONCLICK:
-            
-                if(state.feature === action.payload){
-                    console.log(state.feature);
-                    let addFt = [...state.feature];
-                    state.car.features.push(addFt);
-                    return state.additionalFeatures.id !== action.payload;
-                }else{
-                    return state
-                }
-            break;
-            
-        default: {
-            console.log(state);
+          console.log('addOnClick Function running succesfully...');
+          if(state.car.features.find(item => item.id === action.payload.id)){
             return state;
-        } 
-    }
-  }
+        }else{
+            return {
+                ...state,
+                car: {
+                    ...state.car,
+                    price: state.car.price + action.payload.price,
+                    features: [...state.car.features, action.payload ]
+                }
+            };
+        };
+        case REMOVE_ONCLICK:
+          console.log('removeOnClick Function running succesfully...')
+          return {
+            ...state,
+            car: {
+                ...state.car,
+                price: state.car.price - action.payload.price,
+                features: state.car.features.filter(item => {
+                    return item.id !== action.payload.id
+                })
+            }
+        };
+        default: {
+            // console.log(state);
+            return state;
+        }
+    };
+  };
