@@ -21,7 +21,7 @@ export const carState = {
     switch(action.type) {
         case ADD_ONCLICK:
           console.log('addOnClick Function running succesfully...');
-          if(state.car.features.find(item => item.id === action.payload.id)){
+          if(state.car.features.find(feat => feat.id === action.payload.id)){
             return state;
         }else{
             return {
@@ -40,8 +40,8 @@ export const carState = {
             car: {
                 ...state.car,
                 price: state.car.price - action.payload.price,
-                features: state.car.features.filter(item => {
-                    return item.id !== action.payload.id
+                features: state.car.features.filter(feat => {
+                    return feat.id !== action.payload.id
                 })
             }
         };

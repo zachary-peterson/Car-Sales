@@ -19,4 +19,4 @@ car: state.car
   }
   
 }
-export default connect(mapStateToProps, {}) (Header);
+export default connect(mapStateToProps, { }) (Header);
